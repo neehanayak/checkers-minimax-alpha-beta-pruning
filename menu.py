@@ -22,10 +22,6 @@ def _draw_shadow_text(surf, font, text, color, x, y, shadow_offset=3):
     surf.blit(font.render(text, True, color),     (x, y))
 
 
-def _draw_divider_line(surf, cx, y, half_width, color):
-    pygame.draw.line(surf, color, (cx - half_width, y), (cx - 40, y), 1)
-    pygame.draw.line(surf, color, (cx + 40,         y), (cx + half_width, y), 1)
-
 
 def _draw_piece_icon(surf, cx, cy, radius, color, rim_color):
     shadow = pygame.Surface((radius * 2 + 8, radius * 2 + 8), pygame.SRCALPHA)
@@ -94,16 +90,15 @@ def render_menu_frame(win, fonts, buttons, vignette, mouse_pos=(0, 0)):
     _draw_shadow_text(win, f["title"], "CHECKERS", GOLD, tx, 80, shadow_offset=3)
 
     # Subtitle
-    sub = f["sub"].render("Minimax  ·  Alpha-Beta Pruning", True, (170, 155, 125))
-    win.blit(sub, (WIDTH // 2 - sub.get_width() // 2, 165))
-    pygame.draw.line(win, (100, 75, 10), (WIDTH // 2 - 180, 193), (WIDTH // 2 + 180, 193), 1)
+    # sub = f["sub"].render("Minimax  ·  Alpha-Beta Pruning", True, (170, 155, 125))
+    # win.blit(sub, (WIDTH // 2 - sub.get_width() // 2, 165))
+    # pygame.draw.line(win, (100, 75, 10), (WIDTH // 2 - 180, 193), (WIDTH // 2 + 180, 193), 1)
 
     # Section header
     start_y = buttons[0][0].y
     sect_y  = start_y - 36
     sect    = f["sect"].render("CHOOSE DIFFICULTY", True, (140, 130, 110))
     win.blit(sect, (WIDTH // 2 - sect.get_width() // 2, sect_y))
-    _draw_divider_line(win, WIDTH // 2, sect_y + 9, 210, (80, 70, 50))
 
     # Buttons
     for rect, depth, label, color, desc in buttons:
